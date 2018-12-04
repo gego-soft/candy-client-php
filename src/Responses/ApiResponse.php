@@ -77,7 +77,6 @@ class ApiResponse extends AbstractResponse
         } else {
             $body = $this->response['value']->getBody()->getContents();
             $contents = json_decode($body, true);
-
             $this->meta = $this->normalize($contents['meta'] ?? []);
             $this->body = $this->normalize($contents['data'] ?? []);
         }
@@ -164,6 +163,8 @@ class ApiResponse extends AbstractResponse
                     $value = $this->mapCollection($value);
                 } elseif (isset($value['data']) && !count($value['data'])) {
                     $value = $this->mapCollection($value['data']);
+                } elseif (is_null($value['data'])) {
+                    $value = $value['data'];
                 }
             }
             $object->{$key} = $value;

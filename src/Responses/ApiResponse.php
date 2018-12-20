@@ -163,7 +163,7 @@ class ApiResponse extends AbstractResponse
                     $value = $this->mapCollection($value);
                 } elseif (isset($value['data']) && !count($value['data'])) {
                     $value = $this->mapCollection($value['data']);
-                } elseif (is_null($value['data'])) {
+                } elseif (isset($value['data']) && is_null($value['data'])) {
                     $value = $value['data'];
                 }
             }

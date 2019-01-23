@@ -161,9 +161,9 @@ class ApiResponse extends AbstractResponse
                     }
                 } elseif (isset($value[0]) || !count($value)) {
                     $value = $this->mapCollection($value);
-                } elseif (isset($value['data']) && !count($value['data'])) {
+                } elseif (isset($value['data']) && is_iterable($value['data'])) {
                     $value = $this->mapCollection($value['data']);
-                } elseif (isset($value['data']) && is_null($value['data'])) {
+                } elseif (array_key_exists('data', $value) && is_null($value['data'])) {
                     $value = $value['data'];
                 }
             }
